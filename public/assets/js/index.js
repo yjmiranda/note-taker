@@ -57,7 +57,6 @@ var handleNoteSave = function() {
   };
 
   saveNote(newNote).then(function() {
-    console.log("dog");
     getAndRenderNotes();
     renderActiveNote();
   });
