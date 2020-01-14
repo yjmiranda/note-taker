@@ -36,7 +36,7 @@ var deleteNote = function(id) {
 var renderActiveNote = function() {
   $saveNoteBtn.hide();
 
-  if (activeNote.id) {
+  if (activeNote.id || activeNote.id === 0) {
     $noteTitle.attr("readonly", true);
     $noteText.attr("readonly", true);
     $noteTitle.val(activeNote.title);
@@ -56,7 +56,8 @@ var handleNoteSave = function() {
     text: $noteText.val()
   };
 
-  saveNote(newNote).then(function(data) {
+  saveNote(newNote).then(function() {
+    console.log("dog");
     getAndRenderNotes();
     renderActiveNote();
   });
@@ -115,7 +116,7 @@ var renderNoteList = function(notes) {
     var $li = $(`<li class='list-group-item' id=${i}>`).data(note);
     var $span = $("<span>").text(note.title);
     var $delBtn = $(
-      "<i class='fas fa-trash-alt float-right text-danger delete-note'>"
+      "<i class='fas fa-trash-alt float-right text-danger delete-note' onClick='window.location.reload()'>"
     );
 
     $li.append($span, $delBtn);
